@@ -1,0 +1,26 @@
+{% if result.err %}
+    <p>{{result.err_mes}}</p>
+{% else %}
+    {% if result.csv %}
+        <table>
+        {% for item in result.csv %}
+            {% if result.detail == None %}
+                <tr>
+                <td> {{item.id}}</td>
+                <td> {{item.surname}}</td>
+                <td> {{item.name}}</td>
+                <td> {{item.birthdate}}</td>
+                <td><a href={{item.nickname|lower}}> {{item.nickname}}</a></td>
+                </tr>
+            {% else %}
+                <p><b>Superhero:</b> {{result.detail|title}}</p>
+                <p><b>Surname:</b> {{item.surname}}</p>
+                <p><b>Name:</b> {{item.name}}</p>
+                <p><b>Birthdate:</b> {{item.birthdate}}</p>
+            {% endif %}
+        {% endfor %}
+        </table>
+    {% else %}
+        <p>No heroes.</p>
+    {% endif %}
+{% endif %}
