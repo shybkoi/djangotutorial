@@ -38,7 +38,6 @@ def get_heroes_info(heroes_nik):
     if not os.path.isfile(file_name):
         result['err'] = True
         result['err_mes'] = u"No source data file!"
-        print u"No source data file!"
         return result
     input_file = open(file_name, "rU")
     read_csv = csv.DictReader(input_file, fieldnames=['id', 'surname',
@@ -52,6 +51,10 @@ def get_heroes_info(heroes_nik):
             res_dic = []
             res_dic.append(row)
             break
+    if heroes_nik != None and len(res_dic) > 1:
+        result['err'] = True
+        result['err_mes'] = u"No such superhero!"
+        return result
     input_file.close()
     result['csv'] = res_dic
     return result
